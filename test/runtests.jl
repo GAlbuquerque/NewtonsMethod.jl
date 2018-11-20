@@ -20,8 +20,9 @@ f2_prime(x) = 3*((x-1)^2)
 f3(x) = 4*x+5
 f3_prime(x) = 4
   
-f4(x) = (x-5)^x  
-f4_prime(x) =  (x-5)^x * log(x-5)
+f4(x) = 5^x - 25  
+f4_prime(x) =  5^x * log(5)
+
   
 @test newtonroot(f2, f2_prime,x₀ = 0).root ≈ 0.9999998643434097
 @test newtonroot(f2, x₀ = 0).root ≈ 0.9999998643434097
@@ -29,8 +30,8 @@ f4_prime(x) =  (x-5)^x * log(x-5)
 @test newtonroot(f3, f3_prime,x₀ = 0).root ≈ -1.25
 @test newtonroot(f3, x₀ = 0).root ≈ -1.25
 
-@test newtonroot(f4, f4_prime,x₀ = 0).root ≈ 5
-@test newtonroot(f4, x₀ = 0).root ≈ 5
+@test newtonroot(f4, f4_prime,x₀ = 0).root ≈ 2
+@test newtonroot(f4, x₀ = 0).root ≈ 2
 
  #Testing tolerance
  @test !(newtonroot(f2, f2′, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)

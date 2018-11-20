@@ -6,26 +6,26 @@ using LinearAlgebra, Statistics, Compat, ForwardDiff
 @testset "NewtonsMethod.jl" begin
 
 #This function has no root, it should return nothing  
-#f1(x) = x^2+1 
-#f1_prime(x) = 2*x 
+f1(x) = x^2+1 
+f1_prime(x) = 2*x 
   
-#@test newtonroot(f1, f1_prime,x₀ = 0).root == nothing
-#@test newtonroot(f1, x₀ = 0).root == nothing
+@test newtonroot(f1, f1_prime,x₀ = 0).root == nothing
+@test newtonroot(f1, x₀ = 0).root == nothing
  
  
 #Now, I will test some functions which I know the roots  
-#f2(x) = (x - 1)^3
-#f2_prime(x) = 3*((x-1)^2)
+f2(x) = (x - 1)^3
+f2_prime(x) = 3*((x-1)^2)
   
-#f3(x) = 4*x+5
-#f3_prime(x) = 4
+f3(x) = 4*x+5
+f3_prime(x) = 4
   
-#f4(x) = 5^x - 25  
-#f4_prime(x) =  5^x * log(5)
+f4(x) = 5^x - 25  
+f4_prime(x) =  5^x * log(5)
 
   
-#@test newtonroot(f2, f2_prime,x₀ = 0).root ≈ 0.9999998643434097
-#@test newtonroot(f2, x₀ = 0).root ≈ 0.9999998643434097
+@test newtonroot(f2, f2_prime,x₀ = 0).root ≈ 0.9999998643434097
+@test newtonroot(f2, x₀ = 0).root ≈ 0.9999998643434097
 
   
 #@test newtonroot(f3, f3_prime,x₀ = 0).root ≈ -1.25

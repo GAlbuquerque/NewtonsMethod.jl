@@ -5,7 +5,8 @@ using LinearAlgebra, Statistics, Compat, ForwardDiff
 
 @testset "NewtonsMethod.jl" begin
 
-f1(x) = x^2+1 #This function has no root, it should return nothing
+#This function has no root, it should return nothing  
+f1(x) = x^2+1 
 f1_prime(x) = 2*x 
   
 @test newtonroot(f1, f1_prime,x₀ = 0).root == nothing
@@ -30,7 +31,22 @@ f4(x) = (x-5)^x
 @test newtonroot(f4, f4_prime,x₀ = 0).root ≈ 5
 @test newtonroot(f4, x₀ = 0).root ≈ 5
 
-  
-  
-  
+ #Testing tolerance
+ @test !(newtonroot(f2, f2′, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+ @test !(newtonroot(f2, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+
+ #Testing BigFloat
+ @test (BigFloat(0.0) + newtonroot(f1, f1_prime x₀ = 0, tolerance = 1E-50).root ≈ 0.9999998643434097)
+ @test (BigFloat(0.0) + newtonroot(f1, x₀ = 0, tolerance = 1E-50).root ≈ 0.9999998643434097)
+ @test (newtonroot(f1, f1_prime, x₀ = BigFloat(0.0), tolerance = 1E-10).root ≈ 0.9999998643434097)
+ @test (newtonroot(f1,x₀ = BigFloat(0.0), tolerance = 1E-10).root ≈ 0.9999998643434097) 
+ 
+  #Testing if the maxiter works as intended
+   #Function 1
+   @test newtonroot(f1, f1_prime, x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f1, x₀ = 0, maxiter = 10).root == nothing
+   #Function 2
+   @test newtonroot(f2, f2_prime, x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f2,x₀ = 0, maxiter = 10).root == nothing
+   
 end

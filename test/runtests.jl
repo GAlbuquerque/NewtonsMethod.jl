@@ -41,15 +41,15 @@ f4_prime(x) =  5^x * log(5)
 
   
  #Testing BigFloat
- #@test newtonroot(f2, f2_prime, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
- #@test newtonroot(f2, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+ @test newtonroot(f2, f2_prime, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+ @test newtonroot(f2, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
   
  #Testing if the maxiter works as intended
    #Function 2
-  # @test newtonroot(f2, f2_prime, x₀ = 0, maxiter = 10).root == nothing
-   #@test newtonroot(f2, x₀ = 0, maxiter = 10).root == nothing
-   #Function 4
-   #@test newtonroot(f4, f4_prime, x₀ = 0, maxiter = 10).root == nothing
-   #@test newtonroot(f4,x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f2, f2_prime, x₀ = 0, maxiter = 10).root == nothing
+  @test newtonroot(f2, x₀ = 0, maxiter = 10).root == nothing
+  # Function 4
+   @test newtonroot(f4, f4_prime, x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f4,x₀ = 0, maxiter = 10).root == nothing
    
 end

@@ -27,6 +27,7 @@ f4_prime(x) =  5^x * log(5)
 @test newtonroot(f2, f2_prime,x₀ = 0).root ≈ 0.9999998643434097
 @test newtonroot(f2, x₀ = 0).root ≈ 0.9999998643434097
 
+  
 @test newtonroot(f3, f3_prime,x₀ = 0).root ≈ -1.25
 @test newtonroot(f3, x₀ = 0).root ≈ -1.25
 
@@ -34,21 +35,21 @@ f4_prime(x) =  5^x * log(5)
 @test newtonroot(f4, x₀ = 0).root ≈ 2
 
  #Testing tolerance
- @test !(newtonroot(f2, f2′, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+ @test !(newtonroot(f2, f2_prime, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
  @test !(newtonroot(f2, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+ @test (newtonroot(f2, x₀ = 0, tolerance = 1, 1E-10).root ≈ 1 #with smaller tolerance, I can reach the "exact" number
 
+  
  #Testing BigFloat
- @test (BigFloat(0.0) + newtonroot(f1, f1_prime x₀ = 0, tolerance = 1E-50).root ≈ 0.9999998643434097)
- @test (BigFloat(0.0) + newtonroot(f1, x₀ = 0, tolerance = 1E-50).root ≈ 0.9999998643434097)
- @test (newtonroot(f1, f1_prime, x₀ = BigFloat(0.0), tolerance = 1E-10).root ≈ 0.9999998643434097)
- @test (newtonroot(f1,x₀ = BigFloat(0.0), tolerance = 1E-10).root ≈ 0.9999998643434097) 
- 
-  #Testing if the maxiter works as intended
-   #Function 1
-   @test newtonroot(f1, f1_prime, x₀ = 0, maxiter = 10).root == nothing
-   @test newtonroot(f1, x₀ = 0, maxiter = 10).root == nothing
+ @test newtonroot(f2, f2_prime, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+ @test newtonroot(f2, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+  
+ #Testing if the maxiter works as intended
    #Function 2
    @test newtonroot(f2, f2_prime, x₀ = 0, maxiter = 10).root == nothing
-   @test newtonroot(f2,x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f2, x₀ = 0, maxiter = 10).root == nothing
+   #Function 4
+   @test newtonroot(f4, f4_prime, x₀ = 0, maxiter = 10).root == nothing
+   @test newtonroot(f4,x₀ = 0, maxiter = 10).root == nothing
    
 end

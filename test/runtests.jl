@@ -35,14 +35,14 @@ f4_prime(x) =  5^x * log(5)
 @test newtonroot(f4, x₀ = 0).root ≈ 2
 
  #Testing tolerance
- #@test !(newtonroot(f2, f2_prime, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
- #@test !(newtonroot(f2, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
- #@test (newtonroot(f2, x₀ = 0, tolerance = 1, 1E-10).root ≈ 1 #with smaller tolerance, I can reach the "exact" number
+ @test !(newtonroot(f2, f2_prime, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+ @test !(newtonroot(f2, x₀ = 0, tolerance = 1).root ≈ 0.9999998643434097)
+ @test (newtonroot(f2, x₀ = 0, tolerance = 1, 1E-10).root ≈ 1 #with smaller tolerance, I can reach the "exact" number
 
   
  #Testing BigFloat
- #@test newtonroot(f2, f2_prime, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
- #@test newtonroot(f2, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+ @test newtonroot(f2, f2_prime, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
+ @test newtonroot(f2, x₀ = BigFloat(0.0), tolerance = 1E-40).root ≈ 1
   
  #Testing if the maxiter works as intended
    #Function 2
